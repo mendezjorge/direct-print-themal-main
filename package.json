@@ -1,0 +1,26 @@
+{
+  "name": "print-term",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "build": "pkg index.js --targets node14-win-x64 -o impresora"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "node-thermal-printer": "^4.1.2"
+  },
+  "pkg": {
+    "targets": [ "node14-win-x64" ],
+    "outputPath": "dist"
+  },
+  "devDependencies": {
+    "pkg": "^5.8.1"
+  }
+}
+
+

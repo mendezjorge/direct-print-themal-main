@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Documentación de la API - Ruta /imprimir</title>
+</head>
+
+<body>
+  <h1>Documentación de la API - Ruta /imprimir</h1>
+
+  <h2>Descripción</h2>
+  <p>La ruta <code>/imprimir</code> se utiliza para enviar datos de impresión a la API. Permite imprimir contenido en
+    una impresora configurada.</p>
+
+  <h2>Método</h2>
+  <p><strong>POST</strong></p>
+
+  <h2>Parámetros de Solicitud</h2>
+  <p>La solicitud POST debe incluir un objeto JSON con los siguientes parámetros:</p>
+  <ul>
+    <li><strong>data</strong> (arreglo): Un arreglo de objetos que contienen las siguientes propiedades:</li>
+    <ul>
+      <li><strong>align</strong> (cadena): (Opcional) La alineación del texto ("center", "left" o "right").</li>
+      <li><strong>print</strong> (cadena): (Opcional) El texto que se imprimirá.</li>
+      <li><strong>println</strong> (cadena): (Opcional) El texto que se imprimirá con un salto de línea.</li>
+    </ul>
+  </ul>
+
+  <h2>Ejemplo de Solicitud</h2>
+  <pre>
+        <code>
+POST /imprimir
+Content-Type: application/json
+
+ [
+    {
+      "align": "center",
+    },
+    { 
+      "println": "Texto alineado a la izquierda con salto de línea"
+    },
+    {
+      "print": "Otro texto"
+    },
+  ]
+        </code>
+    </pre>
+
+  <h2>Respuesta</h2>
+  <p>La API responderá con un objeto JSON que contiene un mensaje de éxito o error.</p>
+
+  <h2>Ejemplo de Respuesta Exitosa</h2>
+  <pre>
+        <code>
+{
+  "message": "Impresión completada"
+}
+        </code>
+    </pre>
+
+  <h2>Ejemplo de Respuesta de Error</h2>
+  <pre>
+        <code>
+{
+  "error": "No se pueden imprimir datos vacíos."
+}
+        </code>
+    </pre>
+    <h2>Enviar Solicitud de Impresión</h2>
+    <p>Puedes utilizar la función <strong>callService(data)</strong> para enviar una solicitud de impresión a la API.</p>
+    
+    <h3>Ejemplo de Uso:</h3>
+    <pre>
+        <code>
+    // Ejemplo de datos de impresión
+    var data = [
+      {
+        "align": "center"
+      },
+      {
+        "println": "Texto alineado a la izquierda con salto de línea"
+      },
+      {
+        "print": "Otro texto"
+      }
+    ];
+    
+    // Llama a la función para enviar la solicitud
+    callService(data);
+        </code>
+    </pre>
+    
+    <h3>Definición de la Función:</h3>
+    <pre>
+        <code>
+    function callService(data) {
+      var url = "http://localhost:3005/imprimir";
+      fetch(url, {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*"
+        }
+      })
+        .then((res) => res.json())
+        .catch((error) => console.log("Error:", error))
+        .then((response) => console.log("Success:", response));
+    }
+        </code>
+    </pre>
+    
+
+
+  <h2>Notas</h2>
+  <ul>
+    <li>Asegúrate de que la impresora esté correctamente configurada y compartida en tu red con un nombre específico,
+      como "<strong>impresora</strong>".</li>
+    <li>La estructura de datos en la solicitud debe coincidir con el formato esperado por la API.</li>
+  </ul>
+</body>
+
+</html>
